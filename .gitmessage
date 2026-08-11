@@ -1,0 +1,30 @@
+# <type>: <subject>
+#
+# <body>
+#
+# <footer>
+#
+# Type can be:
+#   feat     (new feature)
+#   fix      (bug fix)
+#   docs     (documentation)
+#   refactor (refactoring production code)
+#   test     (adding or updating tests)
+#   chore    (maintenance tasks, dependencies)
+#
+# Subject line rules:
+#   - Use imperative, present tense: "add" not "added" or "adds"
+#   - Don't capitalize first letter
+#   - No period (.) at the end
+#   - Maximum 50 characters
+#
+# Body rules:
+#   - Explain what and why, not how
+#   - Wrap at 72 characters
+#   - Separate subject from body with a blank line
+#
+# Example:
+#   feat: add user authentication
+#
+#   Implement JWT-based authentication for API endpoints.
+#   This allows clients to authenticate requests with bearer tokens.

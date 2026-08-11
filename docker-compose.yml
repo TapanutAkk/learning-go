@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  go:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-learning
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=postgres
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - db
+      - redis
+    networks:
+      - go-network
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:16-alpine
+    container_name: go-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - go-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: go-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - go-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
+networks:
+  go-network:
+    driver: bridge
