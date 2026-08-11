@@ -21,7 +21,24 @@ docker-compose up -d
 
 # View running containers
 docker-compose ps
+
+# Setup environment variables
+cp .env.example .env
 ```
+
+### Environment Variables
+
+`.env` file contains configuration for Database, Redis, and Server. Values are already set to match Docker services:
+
+```bash
+# For local development, copy from example
+cp .env.example .env
+
+# Edit if needed (but defaults work with Docker)
+# vim .env
+```
+
+**Note:** `.env` is in `.gitignore` to keep secrets safe. Commit `.env.example` instead.
 
 ### Working with Docker
 
