@@ -39,7 +39,7 @@ docker-compose down
 docker-compose logs -f [service-name]
 
 # Access Go container shell
-docker-compose exec go bash
+docker-compose exec go sh
 
 # Access PostgreSQL
 docker-compose exec db psql -U postgres
